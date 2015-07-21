@@ -6,7 +6,8 @@ end
 
 # checks if teh input is one of the valid operators
 def is_operator?(x)
-  x.size == 1 && ( x == '+' || x == '-' || x == '*' || x =='/')
+  #x.size == 1 && ( x == '+' || x == '-' || x == '*' || x =='/')
+  x =~ /^[\+\-\*\/]$/
 end
 
 # prompts and gets a valid number or q.
@@ -52,17 +53,13 @@ def calculator
   quit= ""
   loop do
     
-    num1= get_valid_number(quit)
-    if( quit == 'q')
-      break
-    end
+    num1 = get_valid_number(quit)
+    break if( quit == 'q') 
   
-    num2= get_valid_number(quit)
-    if( quit == "q")
-      break
-    end
+    num2 = get_valid_number(quit)
+    break if( quit == "q")
   
-    op= get_valid_operator
+    op = get_valid_operator
     puts "operator is #{op}"
     if (op == '+')
       print_res(num1 + num2)
@@ -71,7 +68,10 @@ def calculator
     elsif (op == '*')
       print_res(num1 * num2)
     elsif (op == '/')
-      print_res(num1 / num2)
+      if num2 == 0.0 then puts "Divide by zero error."
+      else
+        print_res(num1 / num2)
+      end
     else
       break
     end
